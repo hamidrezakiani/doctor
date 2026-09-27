@@ -17,9 +17,7 @@ class Order extends Model
         'subtotal',
         'shipping_cost',
         'total',
-        'product_id',
-        'quantity',
-        'unit_price',
+        'shipped_at'
     ];
 
     protected function casts(): array
@@ -30,6 +28,7 @@ class Order extends Model
             'subtotal' => 'integer',
             'shipping_cost' => 'integer',
             'total' => 'integer',
+            'shipped_at' => 'datetime',
         ];
     }
 

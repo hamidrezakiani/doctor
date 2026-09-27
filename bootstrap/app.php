@@ -1,6 +1,7 @@
 <?php
 
 use App\Domains\Order\Exceptions\InsufficientStockException;
+use App\Domains\Order\Exceptions\InvalidOrderStatusTransitionException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -23,6 +24,14 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $exceptions->render(function (
             InsufficientStockException $exception,
+        ) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], 409);
+        });
+
+        $exceptions->render(function (
+            InvalidOrderStatusTransitionException $exception,
         ) {
             return response()->json([
                 'message' => $exception->getMessage(),

@@ -8,6 +8,9 @@ use App\Domains\Order\Enums\OrderStatus;
 use App\Domains\Order\Enums\ShippingMethod;
 use App\Domains\Order\Repositories\Contracts\OrderRepositoryInterface;
 use App\Models\Order;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Collection;
 
 final class EloquentOrderRepository implements OrderRepositoryInterface
 {
@@ -30,9 +33,13 @@ final class EloquentOrderRepository implements OrderRepositoryInterface
         Order $order,
         OrderStatus $status,
     ): Order {
-        $order->update([
-            'status' => $status,
-        ]);
+        $order->status = $status;
+
+        if ($status === OrderStatus::SHIPPED) {
+            $order->shipped_at = now();
+        }
+
+        $order->save();
 
         return $order->refresh();
     }
@@ -40,5 +47,28 @@ final class EloquentOrderRepository implements OrderRepositoryInterface
     public function find(int $id): ?Order
     {
         return Order::query()->find($id);
+    }
+
+    public function paginate(
+        ?OrderStatus $status = null,
+        int $perPage = 15,
+    ): LengthAwarePaginator {
+        $query = Order::query()
+            ->latest('id');
+
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
+
+        return $query->paginate($perPage);
+    }
+
+    public function findShippedBefore(
+        CarbonImmutable $date,
+    ): Collection {
+        return Order::query()
+            ->where('status', OrderStatus::SHIPPED)
+            ->where('shipped_at', '<=', $date)
+            ->get();
     }
 }
