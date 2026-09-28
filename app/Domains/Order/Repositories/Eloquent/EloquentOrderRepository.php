@@ -8,8 +8,8 @@ use App\Domains\Order\Enums\OrderStatus;
 use App\Domains\Order\Enums\ShippingMethod;
 use App\Domains\Order\Repositories\Contracts\OrderRepositoryInterface;
 use App\Models\Order;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Carbon\CarbonImmutable;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 final class EloquentOrderRepository implements OrderRepositoryInterface

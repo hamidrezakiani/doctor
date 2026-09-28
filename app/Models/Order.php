@@ -17,7 +17,7 @@ class Order extends Model
         'subtotal',
         'shipping_cost',
         'total',
-        'shipped_at'
+        'shipped_at',
     ];
 
     protected function casts(): array

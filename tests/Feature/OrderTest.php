@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Domains\Order\Enums\OrderStatus;
 use App\Domains\Order\Enums\ShippingMethod;
+use App\Domains\Order\Repositories\Contracts\OrderRepositoryInterface;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -268,7 +269,7 @@ final class OrderTest extends TestCase
         ]);
 
         $repository = app(
-            \App\Domains\Order\Repositories\Contracts\OrderRepositoryInterface::class,
+            OrderRepositoryInterface::class,
         );
 
         $repository->updateStatus(

@@ -21,4 +21,3 @@ final class TipaxShippingStrategy implements ShippingCostStrategy
         return self::COST;
     }
 }
-

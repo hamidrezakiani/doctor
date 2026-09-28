@@ -12,8 +12,7 @@ final readonly class DeliverExpiredOrdersAction
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-    ) {
-    }
+    ) {}
 
     public function execute(): int
     {

@@ -20,6 +20,7 @@ class SyncProductsCommand extends Command
     {
         $count = $action->execute();
         $this->info("Successfully synced {$count} products.");
+
         return self::SUCCESS;
     }
 }

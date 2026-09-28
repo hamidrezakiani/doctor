@@ -11,8 +11,7 @@ final readonly class ProductData
         public string $title,
         public int $price,
         public int $stock,
-    ) {
-    }
+    ) {}
 
     public static function fromApi(array $product): self
     {

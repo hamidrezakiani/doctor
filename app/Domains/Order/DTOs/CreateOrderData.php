@@ -12,7 +12,5 @@ final readonly class CreateOrderData
         public int $productId,
         public int $quantity,
         public ShippingMethod $shippingMethod,
-    ) {
-    }
+    ) {}
 }
-

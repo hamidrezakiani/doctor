@@ -13,13 +13,12 @@ final readonly class ShipOrderAction
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-    ) {
-    }
+    ) {}
 
     public function execute(Order $order): Order
     {
         if ($order->status !== OrderStatus::PAID) {
-            throw new InvalidOrderStatusTransitionException();
+            throw new InvalidOrderStatusTransitionException;
         }
 
         return $this->orderRepository->updateStatus(

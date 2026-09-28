@@ -11,12 +11,11 @@ use InvalidArgumentException;
 final readonly class ShippingCostResolver
 {
     /**
-     * @param iterable<ShippingCostStrategy> $strategies
+     * @param  iterable<ShippingCostStrategy>  $strategies
      */
     public function __construct(
         private iterable $strategies,
-    ) {
-    }
+    ) {}
 
     public function calculate(ShippingMethod $method): int
     {

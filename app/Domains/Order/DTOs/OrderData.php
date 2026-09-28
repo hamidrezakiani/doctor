@@ -17,8 +17,7 @@ final readonly class OrderData
         public int $subtotal,
         public int $shippingCost,
         public int $total,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(Order $order): self
     {

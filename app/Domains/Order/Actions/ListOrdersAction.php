@@ -12,8 +12,7 @@ final readonly class ListOrdersAction
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-    ) {
-    }
+    ) {}
 
     public function execute(
         ?OrderStatus $status = null,

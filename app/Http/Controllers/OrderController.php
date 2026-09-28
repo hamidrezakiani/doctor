@@ -7,13 +7,11 @@ namespace App\Http\Controllers;
 use App\Domains\Order\Actions\CreateOrderAction;
 use App\Domains\Order\Actions\ListOrdersAction;
 use App\Domains\Order\Actions\ShipOrderAction;
-use App\Domains\Order\Exceptions\InsufficientStockException;
 use App\Http\Requests\ListOrdersRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Throwable;
 
 final class OrderController extends Controller
@@ -24,8 +22,7 @@ final class OrderController extends Controller
     public function store(
         StoreOrderRequest $request,
         CreateOrderAction $action,
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $order = $action->execute($request->toDto());
 
         return (new OrderResource($order))

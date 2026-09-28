@@ -6,8 +6,8 @@ namespace Tests\Feature;
 
 use App\Domains\Product\DTOs\ProductData;
 use App\Domains\Product\Repositories\Contracts\ProductRepositoryInterface;
-use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
@@ -66,7 +66,7 @@ class ProductSyncTest extends TestCase
                 title: 'Old Product',
                 price: 10000,
                 stock: 5,
-            ) );
+            ));
 
         Http::fake([
             'https://dummyjson.com/products*' => Http::response([
@@ -100,9 +100,9 @@ class ProductSyncTest extends TestCase
             'https://dummyjson.com/products*' => Http::response([], 500),
         ]);
 
-        $this->expectException(\Illuminate\Http\Client\RequestException::class);
+        $this->expectException(RequestException::class);
 
-        $this->artisan('products:sync'); $this->assertDatabaseCount('products', 0);
+        $this->artisan('products:sync');
+        $this->assertDatabaseCount('products', 0);
     }
 }
-

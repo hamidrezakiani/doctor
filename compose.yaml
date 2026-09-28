@@ -131,6 +131,23 @@ services:
     networks:
       - doctor-network
 
+  scheduler:
+    build:
+        context: .
+        dockerfile: docker/laravel/DockerFile
+    container_name: doctor-scheduler
+    restart: unless-stopped
+    working_dir: /var/www/html
+    command: php artisan schedule:work
+    volumes:
+        - .:/var/www/html
+    depends_on:
+        postgres:
+            condition: service_healthy
+        redis:
+            condition: service_healthy
+    networks:
+        - doctor-network
 
 volumes:
   postgres_data:

@@ -16,8 +16,7 @@ final class SyncProductsAction
 
     public function __construct(
         private readonly ProductRepositoryInterface $productRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws RequestException
@@ -44,4 +43,3 @@ final class SyncProductsAction
         return count($products);
     }
 }
-

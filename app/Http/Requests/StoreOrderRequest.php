@@ -6,9 +6,9 @@ namespace App\Http\Requests;
 
 use App\Domains\Order\DTOs\CreateOrderData;
 use App\Domains\Order\Enums\ShippingMethod;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Contracts\Validation\ValidationRule;
 
 class StoreOrderRequest extends FormRequest
 {
